@@ -3,6 +3,8 @@ import { SearchBar } from './components/SearchBar';
 import { SentimentCard } from './components/SentimentCard';
 import { CrawlingAnimation } from './components/CrawlingAnimation';
 import { TrendingUp, Activity } from 'lucide-react';
+import { toast } from 'sonner@2.0.3';
+import { Toaster } from './components/ui/sonner';
 
 interface StockData {
   ticker: string;
@@ -168,6 +170,13 @@ export default function App() {
         // Remove ticker if already selected
         setSelectedTickers(selectedTickers.filter(t => t !== upperTicker));
       } else {
+        // Check if ticker exists in mockData
+        if (!mockData[upperTicker]) {
+          toast.error(`Ticker "${upperTicker}" not found`, {
+            description: 'Please try one of the available tickers: NVDA, TSLA, AAPL, MSFT, GOOGL'
+          });
+          return;
+        }
         // Add ticker if not selected
         setIsCrawling(true);
         setTimeout(() => {
@@ -202,7 +211,9 @@ export default function App() {
   }, []);
 
   return (
-    <div className="h-screen flex flex-col bg-white">
+    <>
+      <Toaster position="top-right" />
+      <div className="h-screen flex flex-col bg-white">
       {/* Header */}
       <div className="border-b border-gray-200 bg-white">
         <div className="px-6 py-4">
@@ -272,5 +283,6 @@ export default function App() {
         </p>
       </div>
     </div>
+    </>
   );
 }
