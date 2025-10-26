@@ -223,8 +223,7 @@ export default function App() {
                 <Activity className="w-5 h-5 text-white" />
               </div>
               <div>
-                <h1 className="text-gray-900">Sentiment AI</h1>
-                <p className="text-gray-500 text-xs">Real-time market intelligence</p>
+                <h1 className="text-gray-900 text-lg">Realtime Market Copilot Agent</h1>
               </div>
             </div>
             <button
